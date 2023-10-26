@@ -58,26 +58,28 @@ Run the following command to deploy the app to Cloud Foundry:
 You can now see your app running on Cloud Foundry by using the URL provided by the command output.
 
 ### Deploy the image to Kyma Runtime
-1. Install Kyma CLI according to the Installation guide [https://github.com/kyma-project/cli]
-2. Log into SAP BTP subaccount and determine the subdomain
-3. Determine the Kyma Cluster by appending ```.kyma.shoot.live.k8s-hana.ondemand.com```
+1. Install Kubectl according to the Installation guide [https://kubernetes.io/de/docs/tasks/tools/]
+2. Log into SAP BTP subaccount and download the ```kubeconfig.yaml```
+3. Set the environmental variable: 
+Powershell:     ```$ENV:KUBECONFIG="/path/to/kubeconfig.yaml"```
+Bash:           ```export KUBECONFIG="/path/to/kubeconfig.yaml"```
 4. Connect the Kyma CLI to the Kyma cluster using:
-```kyma login -d https://subaccount.kyma.shoot.live.k8s-hana.ondemand.com```
+```kubectl get namespaces```
 5. Create a namespace for you application:
-```kyma create namespace demons```
+```kubectl create namespace demons```
 6. Deploy the application to the namespace using the following command:
-```kyma deploy app demoapp -n demons -s dockerhubsuser/ourdemoapp```
+```kubectl apply -f deployment.yaml -n demons```
 #### To access the deployed application on Kyma, you'll also need a service binding to the App and a API-Rule
 
-With kubectl you can simply edit the templates:
+You can simply edit the templates and apply them with kubectl:
 - py-service.yaml
 - py-apirule.yaml
 
 according to your desired naming conventions and
 push it to the Kyma cluster with the following commands:
 
-```kubectl apply -f kyma/py-service.yaml```
-```kubectl apply -f kyma/py-apirule.yaml```
+```kubectl apply -f kyma/py-service.yaml -n demons```
+```kubectl apply -f kyma/py-apirule.yaml -n demons```
 
 After finished with that steps you should be able to access your application by navigating to:
 ```http://py-apirule.hostname.kyma.shoot.live.k8s-hana.ondemand.com``` 

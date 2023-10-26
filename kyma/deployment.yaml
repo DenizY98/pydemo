@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ourdemoapp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ourdemoapp
+  template:
+    metadata:
+      labels:
+        app: ourdemoapp
+    spec:
+      containers:
+      - name: ourdemoapp
+        image: docker.io/wi21232/ourdemoapp:1.0.0
+        resources:
+          limits:
+            memory: "1Gi"

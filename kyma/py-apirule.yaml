@@ -4,7 +4,7 @@ metadata:
   name: py-apirule
 spec:
   gateway: kyma-system/kyma-gateway
-  host: py-apirule.<hostname> # replace <hostname> with your Kyma hostname
+  host: py-apirule.<hostname>.kyma.ondemand.com #Fill in your Kyma Hostname before applying
   service:
     name: ourservice
     port: 80
