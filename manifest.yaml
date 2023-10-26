@@ -1,0 +1,7 @@
+---
+applications:
+- name: ourdemoapp
+  docker:
+    image: docker.io/wi21232/ourdemoapp:1.0.0
+  instances: 1
+  memory: 1G
